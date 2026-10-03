@@ -1,0 +1,20 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Clinic_Management_System_MVC.Models
+{
+    public class Department
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string? Name { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string? Location { get; set; }
+
+        public ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
+    }
+}

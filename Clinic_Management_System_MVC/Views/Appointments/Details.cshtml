@@ -1,0 +1,83 @@
+﻿@model Clinic_Management_System_MVC.Models.Appointment
+
+@{
+    ViewData["Title"] = "Appointment Details";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+
+            <div class="mb-4">
+                <h1 class="fw-bold mb-1">Appointment Details</h1>
+                <p class="text-muted">
+                    View all information about this appointment.
+                </p>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4">
+
+                    <div class="mb-4">
+                        <label class="text-muted small">
+                            Appointment Date
+                        </label>
+
+                        <h4 class="fw-bold mb-0">
+                            @Model.AppointmentDate.ToString("dd/MM/yyyy hh:mm tt")
+                        </h4>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-muted small">
+                            Doctor
+                        </label>
+
+                        <p class="fw-semibold mb-0">
+                            @Model.Doctor?.Name
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-muted small">
+                            Department
+                        </label>
+
+                        <p class="fw-semibold mb-0">
+                            @Model.Doctor?.Department?.Name
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-muted small">
+                            Patient
+                        </label>
+
+                        <p class="fw-semibold mb-0">
+                            @Model.Patient?.Name
+                        </p>
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.Id"
+                           class="btn btn-warning px-4">
+                            Edit
+                        </a>
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary px-4">
+                            Back to List
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,179 @@
+@page
+@model RegisterModel
+
+@{
+    ViewData["Title"] = "Create Account";
+}
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+        <!-- Header -->
+        <div class="text-center mb-4">
+
+            <div class="clinic-icon">
+                🏥
+            </div>
+
+            <h2 class="fw-bold mt-3">
+                Create Account
+            </h2>
+
+            <p class="text-muted">
+                Join Clinic Management System
+            </p>
+
+        </div>
+
+        <!-- Register Form -->
+        <form id="registerForm"
+              asp-route-returnUrl="@Model.ReturnUrl"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-3"
+                 role="alert">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+
+                <label asp-for="Input.Email"
+                       class="form-label fw-semibold">
+                    Email
+                </label>
+
+                <input asp-for="Input.Email"
+                       class="form-control form-control-lg"
+                       autocomplete="username"
+                       placeholder="name@example.com" />
+
+                <span asp-validation-for="Input.Email"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+
+                <label asp-for="Input.Password"
+                       class="form-label fw-semibold">
+                    Password
+                </label>
+
+                <input asp-for="Input.Password"
+                       class="form-control form-control-lg"
+                       autocomplete="new-password"
+                       placeholder="Create a password" />
+
+                <span asp-validation-for="Input.Password"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+
+                <label asp-for="Input.ConfirmPassword"
+                       class="form-label fw-semibold">
+                    Confirm Password
+                </label>
+
+                <input asp-for="Input.ConfirmPassword"
+                       class="form-control form-control-lg"
+                       autocomplete="new-password"
+                       placeholder="Confirm your password" />
+
+                <span asp-validation-for="Input.ConfirmPassword"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+            <!-- Register Button -->
+            <button id="registerSubmit"
+                    type="submit"
+                    class="btn btn-primary btn-lg w-100">
+                Create Account
+            </button>
+
+        </form>
+
+        <!-- Login Link -->
+        <div class="text-center mt-4">
+
+            <p class="mb-0 text-muted">
+                Already have an account?
+                <a asp-page="./Login"
+                   class="auth-link fw-semibold">
+                    Sign In
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+
+    .auth-page {
+        min-height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 15px;
+    }
+
+    .auth-card {
+        width: 100%;
+        max-width: 450px;
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 22px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+    }
+
+    .clinic-icon {
+        width: 75px;
+        height: 75px;
+        margin: auto;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 35px;
+        background-color: #e7f1ff;
+    }
+
+    .form-control {
+        border-radius: 12px;
+        padding: 12px 15px;
+    }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+        }
+
+    .btn {
+        border-radius: 12px;
+        padding: 12px;
+    }
+
+    .auth-link {
+        text-decoration: none;
+    }
+
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+
+</style>

@@ -1,0 +1,117 @@
+﻿@model Clinic_Management_System_MVC.ViewModels.AppointmentCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Appointment";
+}
+
+<h1>Create Appointment</h1>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label asp-for="DepartmentId" class="form-label"></label>
+
+        <select asp-for="DepartmentId"
+                asp-items="ViewBag.Departments"
+                class="form-control"
+                id="DepartmentId">
+
+            <option value="">-- Select Department --</option>
+
+        </select>
+
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="DoctorId" class="form-label"></label>
+
+        <select asp-for="DoctorId"
+                class="form-control"
+                id="DoctorId">
+
+            <option value="">-- Select Doctor --</option>
+
+        </select>
+
+        <span asp-validation-for="DoctorId" class="text-danger"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="PatientId" class="form-label"></label>
+
+        <select asp-for="PatientId"
+                asp-items="ViewBag.Patients"
+                class="form-control">
+
+            <option value="">-- Select Patient --</option>
+
+        </select>
+
+        <span asp-validation-for="PatientId" class="text-danger"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="AppointmentDate" class="form-label"></label>
+
+        <input asp-for="AppointmentDate"
+               type="datetime-local"
+               class="form-control" />
+
+        <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">
+        Create Appointment
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Back
+    </a>
+
+</form>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        document.getElementById("DepartmentId").addEventListener("change", function () {
+
+            var departmentId = this.value;
+
+            var doctorSelect = document.getElementById("DoctorId");
+
+            doctorSelect.innerHTML =
+                '<option value="">-- Select Doctor --</option>';
+
+            if (departmentId === "") {
+                return;
+            }
+
+            fetch('/Appointments/GetDoctorsByDepartment?departmentId=' + departmentId)
+                .then(response => response.json())
+                .then(doctors => {
+
+                    doctors.forEach(doctor => {
+
+                        var option = document.createElement("option");
+
+                        option.value = doctor.id;
+                        option.text = doctor.name;
+
+                        doctorSelect.appendChild(option);
+                    });
+
+                });
+
+        });
+
+    </script>
+}

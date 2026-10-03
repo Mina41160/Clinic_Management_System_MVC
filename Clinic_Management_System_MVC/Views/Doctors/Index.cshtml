@@ -1,0 +1,221 @@
+﻿@model IEnumerable<Clinic_Management_System_MVC.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Doctors";
+}
+
+<style>
+    body {
+        background: #f6f8fc;
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, #198754, #48b982);
+        color: white;
+        border-radius: 24px;
+        padding: 35px;
+        margin-bottom: 30px;
+        box-shadow: 0 12px 30px rgba(25, 135, 84, 0.18);
+    }
+
+        .page-header h1 {
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+    .content-card {
+        background: white;
+        border-radius: 22px;
+        padding: 25px;
+        border: 1px solid #e9edf5;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .add-btn {
+        border-radius: 12px;
+        padding: 10px 18px;
+        font-weight: 600;
+    }
+
+    .custom-table {
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
+
+        .custom-table thead th {
+            background: #edf9f2;
+            color: #198754;
+            border: none;
+            font-weight: 700;
+            padding: 15px;
+        }
+
+        .custom-table tbody td {
+            padding: 15px;
+            border-color: #edf0f5;
+        }
+
+        .custom-table tbody tr {
+            transition: 0.2s;
+        }
+
+            .custom-table tbody tr:hover {
+                background: #fbfffc;
+            }
+
+    .doctor-name {
+        font-weight: 700;
+        color: #212529;
+    }
+
+    .department-badge {
+        background: #d1e7dd;
+        color: #198754;
+        padding: 7px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .action-btn {
+        border-radius: 9px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-right: 4px;
+    }
+
+    .empty-box {
+        text-align: center;
+        padding: 55px 20px;
+        color: #6c757d;
+    }
+
+    .empty-icon {
+        font-size: 45px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="container py-4">
+
+    <div class="page-header">
+        <h1>👨‍⚕️ Doctors</h1>
+        <p>Manage doctors and their departments in your clinic.</p>
+    </div>
+
+    <div class="content-card">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+
+            <div>
+                <h4 class="fw-bold mb-1">Doctor List</h4>
+                <p class="text-muted mb-0">
+                    View and manage all registered doctors.
+                </p>
+            </div>
+
+            <a asp-action="Create"
+               class="btn btn-success add-btn">
+                + Add Doctor
+            </a>
+
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="table-responsive">
+
+                <table class="table custom-table">
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Doctor Name</th>
+                            <th>Department</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    <strong>@item.Id</strong>
+                                </td>
+
+                                <td class="doctor-name">
+                                    👨‍⚕️ @item.Name
+                                </td>
+
+                                <td>
+                                    <span class="department-badge">
+                                        🏥 @item.Department?.Name
+                                    </span>
+                                </td>
+
+                                <td>
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-outline-info btn-sm action-btn">
+                                        Details
+                                    </a>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-outline-primary btn-sm action-btn">
+                                        Edit
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-outline-danger btn-sm action-btn">
+                                        Delete
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+        else
+        {
+            <div class="empty-box">
+
+                <div class="empty-icon">
+                    👨‍⚕️
+                </div>
+
+                <h4 class="fw-bold">
+                    No Doctors Found
+                </h4>
+
+                <p>
+                    Start by adding the first doctor to your clinic.
+                </p>
+
+                <a asp-action="Create"
+                   class="btn btn-success add-btn">
+                    + Add Doctor
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+</div>

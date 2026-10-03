@@ -1,0 +1,590 @@
+﻿
+@model Clinic_Management_System_MVC.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+
+    body {
+        background: #f6f8fc;
+    }
+
+    /* =========================
+           HERO SECTION
+        ========================== */
+
+    .hero {
+        background: linear-gradient(135deg, #0d6efd 0%, #4f8cff 100%);
+        color: white;
+        border-radius: 28px;
+        padding: 55px 50px;
+        margin-bottom: 35px;
+        box-shadow: 0 15px 35px rgba(13, 110, 253, 0.20);
+        position: relative;
+        overflow: hidden;
+    }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            right: -70px;
+            top: -70px;
+        }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 750px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+        font-weight: 800;
+        margin-bottom: 18px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        line-height: 1.8;
+        opacity: 0.92;
+        margin-bottom: 25px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 7px 14px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.16);
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .hero-btn {
+        border-radius: 12px;
+        padding: 11px 22px;
+        font-weight: 600;
+        margin-right: 8px;
+    }
+
+
+    /* =========================
+           WELCOME
+        ========================== */
+
+    .welcome-box {
+        background: white;
+        border-radius: 20px;
+        padding: 25px 30px;
+        margin-bottom: 35px;
+        border: 1px solid #e9edf5;
+        box-shadow: 0 7px 20px rgba(0,0,0,0.04);
+    }
+
+        .welcome-box h3 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .welcome-box p {
+            color: #6c757d;
+            margin: 0;
+        }
+
+
+    /* =========================
+           STATISTICS
+        ========================== */
+
+    .section-title {
+        font-weight: 750;
+        color: #212529;
+        margin-bottom: 18px;
+    }
+
+    .stat-card {
+        border: none;
+        border-radius: 20px;
+        padding: 25px;
+        height: 100%;
+        transition: 0.3s;
+        box-shadow: 0 7px 22px rgba(0,0,0,0.06);
+    }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.10);
+        }
+
+    .icon-box {
+        width: 58px;
+        height: 58px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        margin-bottom: 18px;
+    }
+
+    .stat-number {
+        font-size: 34px;
+        font-weight: 800;
+        margin: 0;
+    }
+
+    .stat-name {
+        color: #6c757d;
+        font-weight: 600;
+        margin-top: 5px;
+        margin-bottom: 18px;
+    }
+
+    .department-card {
+        background: #eef5ff;
+    }
+
+        .department-card .icon-box {
+            background: #cfe2ff;
+            color: #0d6efd;
+        }
+
+    .doctor-card {
+        background: #edf9f2;
+    }
+
+        .doctor-card .icon-box {
+            background: #d1e7dd;
+            color: #198754;
+        }
+
+    .patient-card {
+        background: #fff6e6;
+    }
+
+        .patient-card .icon-box {
+            background: #ffe3b3;
+            color: #fd7e14;
+        }
+
+    .appointment-card {
+        background: #f5efff;
+    }
+
+        .appointment-card .icon-box {
+            background: #e3d5f5;
+            color: #6f42c1;
+        }
+
+
+    /* =========================
+           FEATURES
+        ========================== */
+
+    .feature-section {
+        margin-top: 45px;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 20px;
+        padding: 28px;
+        height: 100%;
+        border: 1px solid #e9edf5;
+        transition: 0.3s;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.07);
+        }
+
+    .feature-icon {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h5 {
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .feature-card p {
+        color: #6c757d;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+
+    /* =========================
+           QUICK ACTIONS
+        ========================== */
+
+    .actions-box {
+        background: white;
+        border-radius: 22px;
+        padding: 30px;
+        margin-top: 45px;
+        border: 1px solid #e9edf5;
+        box-shadow: 0 7px 20px rgba(0,0,0,0.04);
+    }
+
+    .action-btn {
+        border-radius: 12px;
+        padding: 11px 18px;
+        font-weight: 600;
+    }
+
+
+    /* =========================
+           FOOTER
+        ========================== */
+
+    .dashboard-footer {
+        text-align: center;
+        margin-top: 45px;
+        padding: 25px;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .logout-btn {
+        border-radius: 10px;
+        padding: 9px 25px;
+        font-weight: 600;
+    }
+
+</style>
+
+
+<div class="container py-4">
+
+    <!-- ================= HERO ================= -->
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                🏥 Clinic Management System
+            </div>
+
+            <h1>
+                Welcome to Your Clinic
+            </h1>
+
+            <p>
+                A simple and organized clinic management system designed
+                to help manage departments, doctors, patients, and
+                appointments efficiently from one place.
+            </p>
+
+            <a asp-controller="Appointments"
+               asp-action="Index"
+               class="btn btn-light hero-btn">
+                📅 View Appointments
+            </a>
+
+            <a asp-controller="Doctors"
+               asp-action="Index"
+               class="btn btn-outline-light hero-btn">
+                👨‍⚕️ View Doctors
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= WELCOME ================= -->
+
+    <div class="welcome-box">
+
+        <h3>
+            Hello, @User.Identity?.Name 👋
+        </h3>
+
+        <p>
+            Welcome back. From this dashboard you can manage the main
+            parts of your clinic and keep your data organized in one place.
+        </p>
+
+    </div>
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <h3 class="section-title">
+        Clinic Overview
+    </h3>
+
+    <div class="row g-4">
+
+        <!-- Departments -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="stat-card department-card">
+
+                <div class="icon-box">
+                    🏥
+                </div>
+
+                <p class="stat-number">
+                    @Model.DepartmentCount
+                </p>
+
+                <div class="stat-name">
+                    Departments
+                </div>
+
+                <a asp-controller="Departments"
+                   asp-action="Index"
+                   class="btn btn-primary w-100">
+                    Manage Departments
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Doctors -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="stat-card doctor-card">
+
+                <div class="icon-box">
+                    👨‍⚕️
+                </div>
+
+                <p class="stat-number">
+                    @Model.DoctorCount
+                </p>
+
+                <div class="stat-name">
+                    Doctors
+                </div>
+
+                <a asp-controller="Doctors"
+                   asp-action="Index"
+                   class="btn btn-success w-100">
+                    Manage Doctors
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Patients -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="stat-card patient-card">
+
+                <div class="icon-box">
+                    🧑‍🤝‍🧑
+                </div>
+
+                <p class="stat-number">
+                    @Model.PatientCount
+                </p>
+
+                <div class="stat-name">
+                    Patients
+                </div>
+
+                <a asp-controller="Patients"
+                   asp-action="Index"
+                   class="btn btn-warning w-100">
+                    Manage Patients
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Appointments -->
+
+        <div class="col-md-6 col-lg-3">
+
+            <div class="stat-card appointment-card">
+
+                <div class="icon-box">
+                    📅
+                </div>
+
+                <p class="stat-number">
+                    @Model.AppointmentCount
+                </p>
+
+                <div class="stat-name">
+                    Appointments
+                </div>
+
+                <a asp-controller="Appointments"
+                   asp-action="Index"
+                   class="btn btn-secondary w-100">
+                    Manage Appointments
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <div class="feature-section">
+
+        <h3 class="section-title">
+            What You Can Do
+        </h3>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📋
+                    </div>
+
+                    <h5>
+                        Manage Records
+                    </h5>
+
+                    <p>
+                        Add, update, view, and delete clinic records
+                        through simple and organized management pages.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🩺
+                    </div>
+
+                    <h5>
+                        Organize Doctors
+                    </h5>
+
+                    <p>
+                        Keep doctors connected to their departments
+                        and easily manage the information of each doctor.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📅
+                    </div>
+
+                    <h5>
+                        Manage Appointments
+                    </h5>
+
+                    <p>
+                        Create and manage appointments while selecting
+                        the appropriate department, doctor, and patient.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= QUICK ACTIONS ================= -->
+
+    <div class="actions-box">
+
+        <h3 class="section-title">
+            Quick Actions
+        </h3>
+
+        <div class="d-flex flex-wrap gap-2">
+
+            <a asp-controller="Departments"
+               asp-action="Create"
+               class="btn btn-primary action-btn">
+                + Add Department
+            </a>
+
+            <a asp-controller="Doctors"
+               asp-action="Create"
+               class="btn btn-success action-btn">
+                + Add Doctor
+            </a>
+
+            <a asp-controller="Patients"
+               asp-action="Create"
+               class="btn btn-warning action-btn">
+                + Add Patient
+            </a>
+
+            <a asp-controller="Appointments"
+               asp-action="Create"
+               class="btn btn-secondary action-btn">
+                + New Appointment
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="dashboard-footer">
+
+        <p class="text-muted mb-3">
+            Clinic Management System
+            <br />
+            Manage your clinic. Organize your data. Simplify your workflow.
+        </p>
+
+        <form asp-area="Identity"
+              asp-page="/Account/Logout"
+              method="post"
+              class="d-inline">
+
+            <button type="submit"
+                    class="btn btn-outline-danger logout-btn">
+                Logout
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
